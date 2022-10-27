@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('NIM-NIDN')->unique();
+            $table->string('NIM_NIDN')->unique();
             $table->boolean('status')->default(true);
         });
     }

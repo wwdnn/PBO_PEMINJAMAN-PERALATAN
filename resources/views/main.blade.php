@@ -14,10 +14,16 @@
   <body class="text-center">
     
   <main class="form-signin w-100 m-auto">
-    <form action="/login" method="post">
+    @if(\Session::has('alert'))
+      <div class="alert alert-danger">
+          <div>{{Session::get('alert')}}</div>
+      </div>
+    @endif
+
+    <form action="/dashboard" method="post">
       @csrf
       <div class="form-floating mb-4">
-        <input type="text" name="nim-nidn" class="form-control" id="floatingInput" autofocus required>
+        <input type="text" name="NIM_NIDN" class="form-control" id="floatingInput">
         <label for="floatingInput">NIM/NIDN</label>
       </div>
 
