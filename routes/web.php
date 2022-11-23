@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,13 +12,13 @@ use App\Http\Controllers\LoginController;
 |
 */
 
+
 Route::get('/', function () {
-    return view('main');
+    return view('auth.userLogin');
 });
 
-Route::get('/dashboard', function() {
-    return view('dashboard.index');
-}); 
-
-Route::get('/dashboard', [LoginController::class, 'index']);
-Route::post('/dashboard', [LoginController::class, 'authenticate']);
+Route::post('/', [\App\Http\Controllers\UserController::class, 'login']);
+Route::get('/pageUser', [\App\Http\Controllers\PageUserController::class, 'index'])->name('pageUser');
+Route::get('/pageUser/{id}', [\App\Http\Controllers\PageUserController::class, 'show'])->name('pageUser.show');
+// Route::post('/pageUser/{id}', [\App\Http\Controllers\PageUserController::class, 'pinjam'])->name('pageUser.pinjam');
+// Route::resource('pageUser','PageUserController');
