@@ -10,8 +10,8 @@
   </button>
 
   <div class="navbar-nav">
-    <div class="nav-item text-nowrap">
-      <h5 class="text-white">{{Auth::user()->name}}</h5>
+    <div class="nav-item text-nowrap d-flex">
+      <h5 class="text-white align-items-center">{{Auth::user()->name}}</h5>
       <form action="{{url('logout')}}" method="POST">
         @csrf
         <button class="btn btn-danger" type="submit">Logout</button>
