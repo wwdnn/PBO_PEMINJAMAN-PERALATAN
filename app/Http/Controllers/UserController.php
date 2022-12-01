@@ -10,13 +10,30 @@ class UserController extends Controller
 {
     public function login(Request $request)
     {
-        // login berdasarkan nim_nidn
-        $user = User::where('NIM_NIDN', $request->NIM_NIDN)->first();
-        if ($user) {
-            return redirect()->to('pageUser');
-        } else {
-            return redirect()->back()->with('alert', 'NIM/NIDN tidak terdaftar');
-        }
+        $credential = $request->validate([
+            'nim_nidn' => 'numeric|required',
+        ]);
 
+        $user = User::where('nim_nidn', $request->nim_nidn)->first();
+        
+        if ($user) 
+        {
+            Auth::login($user);
+            request()->session()->regenerate();
+            return redirect()->intended('dashboard-user');
+        } 
+
+        return back()->withErrors([
+            'nim_nidn' => 'NIM/NIDN Tidak Terdaftar.',
+        ]);
+
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        return redirect('/');
     }
 }

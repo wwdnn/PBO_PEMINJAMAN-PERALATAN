@@ -1,21 +1,19 @@
-<!-- @extends('master')
-@section('title', 'Detail Barang')
-@section('content')
-<div class="modal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+@extends('pageUser')
+@section("isiContent")
+
+<div class="row">
+  @foreach ($products as $product)
+  <div class="col">
+    <div class="card my-4 card-produk">
+      <img src="{{url('upload')}}/{{$product->gambar_barang}}" class="img-produk card-img-top justify-content-center">
+      <div class="card-body content-produk">
+        <h2 class="card-title text-center pt-4">{{$product->nama_barang}}</h2>
+        <h3 class="card-text">Stok :  <span>{{$product->stok_barang}} </span></h3>
+        <a href="{{url('detail-barang')}}/{{$product->id}}" class="btn">DETAIL</a>
       </div>
     </div>
   </div>
+  @endforeach
 </div>
-@endsection -->
+
+@endsection
