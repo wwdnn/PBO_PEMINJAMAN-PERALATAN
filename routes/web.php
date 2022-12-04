@@ -15,11 +15,6 @@ use App\Http\Controllers\TestQueueEmails;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -49,7 +44,7 @@ Route::get('queue', [App\Http\Controllers\TestQueueEmails::class, 'sendTestEmail
 
 Route::get('/', function () {
     return view('auth.userLogin');
-})->name('login')->middleware('guest');
+})->name('login');
 
 Route::post('/', [\App\Http\Controllers\UserController::class, 'login']);
 Route::post('/logout', [\App\Http\Controllers\UserController::class, 'logout'])->name('logout');
