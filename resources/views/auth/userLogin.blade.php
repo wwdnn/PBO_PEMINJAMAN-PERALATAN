@@ -21,7 +21,7 @@
         </div>
 
         <div class="card-body">
-          <form action="/" method="post">
+          <form action="/login-peminjam" method="post">
             @csrf
             <div class="form-floating mb-4">
               <input type="text" name="nim_nidn" class="form-control @error('nim_nidn') is-invalid @enderror" id="NIM_NIDN" autofocus required>
