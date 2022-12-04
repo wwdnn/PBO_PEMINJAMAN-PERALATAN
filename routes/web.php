@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Activitylog\Models\Activity;
+use App\Http\Controllers\TestQueueEmails;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,3 +46,16 @@ Route::get('mpdf', [App\Http\Controllers\BarangController::class, 'createPDF'])-
 
 // jobs & queues for TestQueueEmail
 Route::get('queue', [App\Http\Controllers\TestQueueEmails::class, 'sendTestEmails'])->name('queue.index');
+
+Route::get('/', function () {
+    return view('auth.userLogin');
+})->name('login')->middleware('guest');
+
+Route::post('/', [\App\Http\Controllers\UserController::class, 'login']);
+Route::post('/logout', [\App\Http\Controllers\UserController::class, 'logout'])->name('logout');
+
+Route::get('/dashboard-user', [\App\Http\Controllers\PageUserController::class, 'index'])->middleware('auth');
+Route::get('detail-barang/{id}', [\App\Http\Controllers\PinjamController::class, 'index'])->middleware('auth');
+Route::post('pinjam-barang/{id}', [\App\Http\Controllers\PinjamController::class, 'pinjam']);
+Route::get('cart-peminjaman', [\App\Http\Controllers\PinjamController::class, 'cart'])->middleware('auth');
+Route::delete('cart-peminjaman/{id}', [\App\Http\Controllers\PinjamController::class, 'delete']);
