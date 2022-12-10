@@ -76,7 +76,7 @@
                  </li>
                     <li class="">
                         <?php
-                           $pinjaman_utama = \App\Models\Peminjaman::where('id_user', Auth::user()->id)->where('status_peminjaman', 0)->first();
+                           $pinjaman_utama = \App\Models\Peminjaman::where('id_user', Auth::user()->id)->where('status_peminjaman', 'Konfirmasi')->first();
 
                            if(!empty($pinjaman_utama)){
                               $notif = \App\Models\PinjamanDetail::where('id_pinjaman', $pinjaman_utama->id)->count();

@@ -8,7 +8,7 @@
                 <div class="content text-center">
                     <h1>JTK</h1>
                     <h3>Politeknik Negeri Bandung</h3>
-                    <button ><a href="{{route('login-peminjam')}}""> Mulai Pinjam Barang </a></button>
+                    <button ><a href="{{url('login-peminjaman')}}""> Mulai Pinjam Barang </a></button>
                 </div>
             </div>
 

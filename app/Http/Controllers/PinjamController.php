@@ -22,7 +22,7 @@ class PinjamController extends Controller
     public function pinjam(Request $request, $id)
     {
         $product = Product::where('id', $id)->first();
-        $tanggal = Carbon::now();
+        $tanggal = Carbon::now()->format('Y-m-d');
 
         // Validasi jumlah barang yang dipinjam
         if ($request->jumlah_barang > $product->stok_barang) {
@@ -31,21 +31,32 @@ class PinjamController extends Controller
         }
 
         // Cek Validasi
-        $cek_pinjaman = Peminjaman::where('id_user', Auth::user()->id)->where('status_peminjaman', 0)->first();
+        $cek_pinjaman = Peminjaman::where('id_user', Auth::user()->id)->where('status_peminjaman', 'Konfirmasi')->first();
 
         if(empty($cek_pinjaman))
         {
-            // simpan ke database
-            $pinjaman = new Peminjaman();
-            $pinjaman->id_user = Auth::user()->id;
-            $pinjaman->status_peminjaman = 0;
-            $pinjaman->tanggal_peminjaman = $tanggal;
-            $pinjaman->save();
+            $cek_tanggal_pinjam = Peminjaman::where('id_user', Auth::user()->id)->where('tanggal_peminjaman', $tanggal)->first();
+            
+            if(empty($cek_tanggal_pinjam) || $cek_tanggal_pinjam->status_peminjaman == "Dikembalikan")
+            {
+                // simpan ke database
+                $pinjaman = new Peminjaman();
+                $pinjaman->id_user = Auth::user()->id;
+                $pinjaman->status_peminjaman = "Konfirmasi";
+                $pinjaman->tanggal_peminjaman = $tanggal;
+                $pinjaman->save();
+            }
+            else
+            {
+                Alert::error('Gagal Dipinjam', 'Anda Sudah Meminjam Barang Hari Ini');
+                return redirect()->back();
+            }
+            
         }
 
 
         // simpan ke database pesanan details
-        $Pinjaman_baru = Peminjaman::where('id_user', Auth::user()->id)->where('status_peminjaman', 0)->first();
+        $Pinjaman_baru = Peminjaman::where('id_user', Auth::user()->id)->where('status_peminjaman', 'Konfirmasi')->first();
 
         // cek pesanan detail
         $cek_pinjaman_detail = PinjamanDetail::where('id_barang', $product->id)->where('id_pinjaman', $Pinjaman_baru->id)->first();
@@ -56,6 +67,7 @@ class PinjamController extends Controller
             $pinjaman_detail->id_pinjaman = $Pinjaman_baru->id;
             $pinjaman_detail->id_barang = $product->id;
             $pinjaman_detail->jumlah_barang = $request->jumlah_barang;
+            $pinjaman_detail->status_pinjam_barang = null;
             $pinjaman_detail->save();
         }
         else
@@ -69,15 +81,15 @@ class PinjamController extends Controller
         }
 
         // alert success
-        alert()->success('Berhasil Dipinjam','Barang Berhasil Dimasukkan Ke Keranjang');
+        alert()->success('Berhasil','Barang Berhasil Dimasukkan Ke Keranjang');
 
-        return redirect('cart-peminjaman');
+        return redirect('dashboard-user');
 
     }
 
     public function cart()
     {
-        $peminjaman = Peminjaman::where('id_user', Auth::user()->id)->where('status_peminjaman', 0)->first();
+        $peminjaman = Peminjaman::where('id_user', Auth::user()->id)->where('status_peminjaman', 'Konfirmasi')->first();
 
         if(!empty($peminjaman))
         {
@@ -113,10 +125,10 @@ class PinjamController extends Controller
     {
         $user = User::where('id', Auth::user()->id)->first();
 
-        $peminjaman = Peminjaman::where('id_user', Auth::user()->id)->where('status_peminjaman',0)->first();
+        $peminjaman = Peminjaman::where('id_user', Auth::user()->id)->where('status_peminjaman','Konfirmasi')->first();
         
         $id_pinjaman = $peminjaman->id;
-        $peminjaman->status_peminjaman = 1;
+        $peminjaman->status_peminjaman = "Terpinjam";
         $peminjaman->update(); 
         
         $pinjaman_details = PinjamanDetail::where('id_pinjaman', $id_pinjaman)->get();
@@ -125,6 +137,8 @@ class PinjamController extends Controller
             $product = Product::where('id', $pinjaman_detail->id_barang)->first();
             $product->stok_barang = $product->stok_barang - $pinjaman_detail->jumlah_barang;
             $product->update();
+            $pinjaman_detail->status_pinjam_barang = "Terpinjam";
+            $pinjaman_detail->update();
         }
 
         Alert::success('Pinjaman Barang Berhasil', 'Barang yang anda pinjam berhasil dipinjam');

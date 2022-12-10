@@ -21,7 +21,11 @@ Route::get('/', function () { return view('home'); })->middleware('guest');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // URL for Peminjam Peralatan
-Route::get('/login-peminjam', function () { return view('auth.userLogin'); })->name('login-peminjam');
+// Route::get('login-peminjam', function () { return view('auth.userLogin'); })->name('login-peminjam')->middleware('guest');
+Route::get('login-peminjaman', function(){
+    return view('auth.loginUser');
+})->name('login-peminjam')->middleware('guest');
+
 Route::post('/login-peminjam', [\App\Http\Controllers\UserController::class, 'login']);
 Route::post('/logout-peminjam', [\App\Http\Controllers\UserController::class, 'logout']);
 Route::get('/dashboard-user', [\App\Http\Controllers\PageUserController::class, 'index'])->middleware('auth');
@@ -41,6 +45,10 @@ Route::prefix('petugas_peralatan')->group(function () {
     Route::post('/login-petugas', [App\Http\Controllers\Auth\PetugasPeralatanLoginController::class, 'login'])->name('petugas_peralatan.login.submit');
     Route::post('/logout-petugas', [App\Http\Controllers\Auth\PetugasPeralatanLoginController::class, 'logout'])->name('petugas_peralatan.logout');
     Route::get('/dashboard', [App\Http\Controllers\PetugasPeralatanController::class, 'index'])->name('petugas_peralatan.dashboard');
+    
+    Route::get('pengembalian-barang', [App\Http\Controllers\PengembalianController::class, 'pengembalian'])->name('petugas_peralatan.pengembalian');
+    Route::get('pengembalian-detail/{id}', [App\Http\Controllers\PengembalianController::class, 'detailPengembalian'])->name('petugas_peralatan.detailPengembalian');
+    Route::post('pengembalian-barang/{id}/{id_barang}', [App\Http\Controllers\PengembalianController::class, 'pengembalianBarang'])->name('petugas_peralatan.pengembalianBarang');
 });
 
 

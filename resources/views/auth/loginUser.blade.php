@@ -1,5 +1,4 @@
 @extends('master')
-
 @section('title', 'Login')
 @section('content')
 
@@ -8,19 +7,19 @@
     <div class="row justify-content-center align-items-center vh-100">
       <div class="col-md-3">
         
-        @if(\Session::has('alert'))
+        {{-- @if(Session::has('alert'))
         <div class="alert alert-danger">
             <div>{{Session::get('alert')}}</div>
         </div>
-        @endif
+        @endif --}}
 
         <div class="card-login">
           <div class="card-header text-center">
             <h3 class="card-title">Haloo</h3>
           </div>
 
-          <div class="card-body mt-3">
-            <form action="/login-peminjam" method="post">
+          <div class="card-body">
+            <form action="{{url('login-peminjam')}}" method="post">
               @csrf
               <div class="form-floating mb-4">
                 <input type="text" name="nim_nidn" class="form-control-login @error('nim_nidn') is-invalid @enderror" id="NIM_NIDN" autofocus required>
@@ -33,7 +32,7 @@
               </div>
               <button class="w-100 btn btn-lg btn-primary" type="submit">Masuk</button>
             </form>
-          </div>
+          </div> 
 
         </div>
       </div>
