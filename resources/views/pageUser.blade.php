@@ -2,91 +2,111 @@
 @section('title', 'Page User')
 @section('content')
 
-<!-- Header -->
-<header class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow" style="height: 60px">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#"><h1>PEMINJAMAN ALAT</h1></a>
-  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="navbar-nav">
-    <div class="nav-item text-nowrap d-flex">
-      <h5 class="text-white align-items-center">{{Auth::user()->name}}</h5>
-      <form action="{{url('logout-peminjam')}}" method="POST">
-        @csrf
-        <button class="btn btn-danger" type="submit">Logout</button>
-      </form>
-
-    </div>
+<!-- banner bg main start -->
+<div class="banner_bg_main">
+  <!-- header top section start -->
+  <div class="container">
+     <div class="header_section_top mb-5">
+        <div class="row">
+           <div class="col-sm-12">
+              <div class="custom_menu">
+                 <h1 class="text-white">PEMINJAMAN BARANG JTK</h1>
+              </div>
+           </div>
+        </div>
+     </div>
   </div>
-</header>
-
-<div class="container-fluid">
-  <div class="row">
-
-    <!-- SideBar -->
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
-      <div class="position-sticky pt-3 sidebar-sticky">
-        <ul class="nav flex-column">
-
-          <li class="nav-item">
-            <button class="btn">
-              <a class="text-decoration-none" href="{{url('dashboard-user')}}">
-              Dashboard
-              </a>
-            </button>
-          </li>
+  <!-- header top section start -->
+  <!-- header section start -->
+  <div class="header_section">
+     <div class="container">
+        <div class="containt_main mt-5 mb-5">
+           <div id="mySidenav" class="sidenav">
+               <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+               <a class="text-decoration-none" href="{{url('dashboard-user')}}">
+                  <i class='bx bx-home' ></i>
+                  <span class="link_name me-5">Dashboard</span>
+               </a>
+               <a class="text-decoration-none" href="{{url('cart-peminjaman')}}">
+                  <i class='bx bxs-shopping-bags' ></i>
+                  <span class="link_name me-5">Keranjang</span>
+               </a>
+            
+           </div>
+           <span class="toggle_icon" onclick="openNav()"><img src="{{url('assets')}}/toggle-icon.png"></span>
           
-          <li class="nav-item">
-            <button class="btn" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-              Kategori Barang
-            </button>
+           <div class="main">
+              <!-- Another variation with a button -->
+              <div class="input-group justify-content-center">
+               <form action="{{url('search')}}" method="GET" class="form-control-search d-flex">
+                 <input type="search" name="search" class="form-control-search-input" placeholder="Cari Barang">
+                 <div class="input-group-append">
+                    <button class="btn-search btn-secondary" type="button">
+                    <i class="fa fa-search"></i>
+                    </button>
+                 </div>
+               </form>
+              </div>
+           </div>
 
-            <div class="collapse show" id="home-collapse">
-              <ul class="btn-toggle-nav list-unstyled ps-5">
-                <li><a href="#" class="d-inline-flex text-decoration-none rounded mb-2">Dekstop</a></li>
-                <li><a href="#" class="d-inline-flex text-decoration-none rounded mb-2">Monitor</a></li>
-                <li><a href="#" class="d-inline-flex text-decoration-none rounded mb-2">Penyimpanan Data</a></li>
-                <li><a href="#" class="d-inline-flex text-decoration-none rounded mb-2">Komponen Network</a></li>
-                <li><a href="#" class="d-inline-flex text-decoration-none rounded mb-2">Laptop</a></li>
-                <li><a href="#" class="d-inline-flex text-decoration-none rounded mb-2">Keyboard</a></li>
-                <li><a href="#" class="d-inline-flex text-decoration-none rounded mb-2">Mouse</a></li>
-                <li><a href="#" class="d-inline-flex text-decoration-none rounded mb-2">Audio</a></li>
-              </ul>
-            </div>
-          </li>
+           <div class="header_box">
+              <div class="login_menu align-items-center">
+                 <ul>
+                  <li class="nav-item dropdown">
 
-          <li class="nav-item">
-            <?php
-              $pinjaman_utama = \App\Models\Peminjaman::where('id_user', Auth::user()->id)->where('status_peminjaman', 0)->first();
+                     <div class="dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                           <i class="fa fa-user"></i> <span class="caret"></span>
+                        </a>
+                      
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                           <p class="nama-user text-center">{{Auth::user()->name}}</p>
+  
+                           <a class="dropdown-item btn-logout text-center" href="{{ route('logout') }}"
+                              onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                               {{ __('Logout') }}
+                           </a>
+  
+                           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                               @csrf
+                           </form>
+                        </div>  
+                     </div>
+                 </li>
+                    <li class="">
+                        <?php
+                           $pinjaman_utama = \App\Models\Peminjaman::where('id_user', Auth::user()->id)->where('status_peminjaman', 0)->first();
 
-              if(!empty($pinjaman_utama)){
-                $notif = \App\Models\PinjamanDetail::where('id_pinjaman', $pinjaman_utama->id)->count();
-              }
-            ?>
-            <button class="btn">
-              <a class="text-decoration-none" href="{{url('cart-peminjaman')}}">
-              Peminjaman 
-              @if(!empty($notif))
-              <span class="badge bg-danger">{{ $notif }}</span>
-              @endif
-              </a>
-            </button>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <!-- Content -->
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="title-page">Dashboard</h1>
-      </div>
-     
-      <!-- Isi Content -->
-      @yield("isiContent")
-      <!-- Akhir Isi Content -->
-    </main>
+                           if(!empty($pinjaman_utama)){
+                              $notif = \App\Models\PinjamanDetail::where('id_pinjaman', $pinjaman_utama->id)->count();
+                           }
+                        ?>
+                        <a class="text-decoration-none" href="{{url('cart-peminjaman')}}">
+                           <i class="fa fa-shopping-cart text-black" aria-hidden="true"></i>
+                           @if(!empty($notif))
+                           <span class="badge bg-danger">{{ $notif }}</span>
+                           @endif  
+                        </a>
+                    </li>
+                 </ul>
+              </div>
+           </div>
+        </div>
+     </div>
   </div>
+  <!-- header section end -->
 </div>
+<!-- content start -->
+<main class="main-content col-lg-10 px-md-5">
+   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      
+   </div>
+   
+   <!-- Isi Content -->
+   @yield("isiContent")
+   <!-- Akhir Isi Content -->
+</main>
+<!-- banner bg main end -->
+
 @endsection

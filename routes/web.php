@@ -16,6 +16,8 @@ use Spatie\Activitylog\Models\Activity;
 */
 Auth::routes();
 
+Route::get('/', function () { return view('home'); })->middleware('guest');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // URL for Peminjam Peralatan
@@ -27,7 +29,11 @@ Route::get('detail-barang/{id}', [\App\Http\Controllers\PinjamController::class,
 Route::post('pinjam-barang/{id}', [\App\Http\Controllers\PinjamController::class, 'pinjam']);
 Route::get('cart-peminjaman', [\App\Http\Controllers\PinjamController::class, 'cart'])->middleware('auth');
 Route::delete('cart-peminjaman/{id}', [\App\Http\Controllers\PinjamController::class, 'delete']);
+Route::get('konfirmasi-pinjaman', [\App\Http\Controllers\PinjamController::class, 'konfirmasi'])->middleware('auth');
 
+
+// URL for Search Barang
+Route::get('/search', [\App\Http\Controllers\PageUserController::class, 'search'])->name('search')->middleware('auth');
 
 // URL for Petugas Peralatan 
 Route::prefix('petugas_peralatan')->group(function () {

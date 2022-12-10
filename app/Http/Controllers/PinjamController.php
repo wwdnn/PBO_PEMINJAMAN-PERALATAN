@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Peminjaman;
+use App\Models\User;
 use App\Models\PinjamanDetail;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Alert;
 use Illuminate\Support\Facades\Auth;
 
 class PinjamController extends Controller
@@ -24,7 +26,8 @@ class PinjamController extends Controller
 
         // Validasi jumlah barang yang dipinjam
         if ($request->jumlah_barang > $product->stok_barang) {
-            return redirect()->back()->with('alert', 'Jumlah Barang yang dipinjam melebihi stok barang');
+            Alert::error('Gagal Dipinjam', 'Jumlah Barang Yang Dipinjam Melebihi Stok Barang');
+            return redirect()->back();
         }
 
         // Cek Validasi
@@ -65,7 +68,10 @@ class PinjamController extends Controller
             $pinjaman_detail->update();
         }
 
-        return redirect('dashboard-user');
+        // alert success
+        alert()->success('Berhasil Dipinjam','Barang Berhasil Dimasukkan Ke Keranjang');
+
+        return redirect('cart-peminjaman');
 
     }
 
@@ -90,6 +96,7 @@ class PinjamController extends Controller
         $peminjaman = Peminjaman::where('id', $pinjaman_detail->id_pinjaman)->first();
         $pinjaman_detail->delete();
 
+        Alert::error('Berhasil Dihapus', 'Barang Yang Dipinjam Berhasil Dihapus');
         return redirect('cart-peminjaman');
     }
 
@@ -100,5 +107,28 @@ class PinjamController extends Controller
         $pinjaman_details = PinjamanDetail::where('id_pinjaman', $peminjaman->id)->delete();
 
         return redirect('cart-peminjaman');
+    }
+
+    public function konfirmasi()
+    {
+        $user = User::where('id', Auth::user()->id)->first();
+
+        $peminjaman = Peminjaman::where('id_user', Auth::user()->id)->where('status_peminjaman',0)->first();
+        
+        $id_pinjaman = $peminjaman->id;
+        $peminjaman->status_peminjaman = 1;
+        $peminjaman->update(); 
+        
+        $pinjaman_details = PinjamanDetail::where('id_pinjaman', $id_pinjaman)->get();
+
+        foreach ($pinjaman_details as $pinjaman_detail) {
+            $product = Product::where('id', $pinjaman_detail->id_barang)->first();
+            $product->stok_barang = $product->stok_barang - $pinjaman_detail->jumlah_barang;
+            $product->update();
+        }
+
+        Alert::success('Pinjaman Barang Berhasil', 'Barang yang anda pinjam berhasil dipinjam');
+        return redirect('cart-peminjaman');
+
     }
 }
