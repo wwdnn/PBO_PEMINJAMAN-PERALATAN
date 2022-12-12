@@ -455,7 +455,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Cron\\": "src/Cron/"
+                    "Cron": "src/Cron/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",

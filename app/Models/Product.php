@@ -24,4 +24,9 @@ class Product extends Model
     {
         return $this->hasMany('App\Models\PinjamanDetail', 'id_barang', 'id');
     }
+
+    function pengembalians()
+    {
+        return $this->hasMany('App\Models\Pengembalian', 'id_barang', 'id');
+    }
 }

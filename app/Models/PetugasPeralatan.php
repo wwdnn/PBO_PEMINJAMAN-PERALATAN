@@ -26,4 +26,9 @@ class PetugasPeralatan extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function pengembalian()
+    {
+        return $this->hasMany('App\Models\Pengembalian', 'id_petugas_peralatan', 'id');
+    }
 }

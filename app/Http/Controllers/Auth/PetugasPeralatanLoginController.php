@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+<<<<<<< HEAD
+=======
+use Illuminate\Support\Facades\Hash;
+>>>>>>> main
 
 
 class PetugasPeralatanLoginController extends Controller
@@ -42,6 +46,10 @@ class PetugasPeralatanLoginController extends Controller
     public function logout()
     {
         Auth::guard('petugas_peralatan')->logout();
+<<<<<<< HEAD
         return redirect()->route('petugas_peralatan.login');
+=======
+        return redirect('/petugas_peralatan');
+>>>>>>> main
     }
 }
