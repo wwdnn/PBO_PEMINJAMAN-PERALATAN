@@ -48,9 +48,9 @@
             </li>
 
             <li class="">
-                <a href="#">
+                <a href="{{route('petugas_peralatan.pengembalian')}}">
                     <i class='bx bx-home icon'></i>
-                    <span class="text nav-text">...</span>
+                    <span class="text nav-text">Pengembalian</span>
                 </a>
             </li>
         </div>

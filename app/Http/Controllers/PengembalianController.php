@@ -8,6 +8,7 @@ use App\Models\Peminjaman;
 use App\Models\Pengembalian;
 use App\Models\Product;
 use Alert;
+use Carbon\Carbon;
 
 
 class PengembalianController extends Controller
@@ -42,7 +43,7 @@ class PengembalianController extends Controller
     public function pengembalianBarang(Request $request)
     {
         //tanggal pengembalian
-        $tanggal_pengembalian = Cursor::now()->format('Y-m-d');
+        $tanggal_pengembalian = Carbon::now()->format('Y-m-d');
         // update stok barang
         $pinjaman_detail = PinjamanDetail::where('id_barang', $request->id_barang)->first();
         

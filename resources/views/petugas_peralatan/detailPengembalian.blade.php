@@ -1,6 +1,5 @@
-@extends('master')
-@section('title', 'Pengembalian Barang')
-@section('content')
+@extends('petugas_peralatan.index')
+@section('content-petugas')
 <div class="detail-pengembalian">
   <div class="container">
     <div class="table">

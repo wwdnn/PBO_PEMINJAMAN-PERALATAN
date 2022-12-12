@@ -67,7 +67,7 @@ class PinjamController extends Controller
             $pinjaman_detail->id_pinjaman = $Pinjaman_baru->id;
             $pinjaman_detail->id_barang = $product->id;
             $pinjaman_detail->jumlah_barang = $request->jumlah_barang;
-            $pinjaman_detail->status_pinjam_barang = null;
+            $pinjaman_detail->status_pinjam_barang = '';
             $pinjaman_detail->save();
         }
         else
