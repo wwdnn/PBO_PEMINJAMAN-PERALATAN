@@ -1,0 +1,720 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap);
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body{
+  min-height: 100vh;
+  background: #ffffff;
+  /* overflow: hidden; */
+}
+
+/* ======================================= CSS HOME ========================================= */
+
+.home{
+  width: 100%;
+  height: 100vh ;
+  background-image: url(../assets/bg1.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.home .hero{
+  width: 100%;
+}
+
+.home .hero .row{
+  position: relative;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 120px;
+  margin: auto;
+}
+
+.home .hero .row .left-sec{
+  width: 50%;
+  margin-left: 50px;
+
+}
+
+.home .hero .row .left-sec .content{
+  padding-top: 30px;
+}
+
+.home .hero .row .left-sec .content h1{
+  font-size: 195px;
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: 1px;
+}
+
+.home .hero .row .left-sec .content h3{
+  font-size: 40px;
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: 4px;
+}
+
+
+.home .hero .row .left-sec .content button{
+  margin-top: 30px;
+  padding: 10px 30px;
+  border: none;
+  outline: none;
+  background: #d5d73f;
+  color: rgb(109, 82, 8);
+  font-style: italic;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.304);
+}
+
+.home .hero .row .left-sec .content button a{
+  color: rgb(109, 82, 8);
+  text-decoration: none;
+}
+
+.home .hero .row .left-sec .content button:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.304);
+}
+
+.home .right-sec{
+  width: 40%;
+  padding-top: 0;
+}
+
+.home .right-sec img{
+  height: 350px;
+  margin: auto;
+}
+
+.slick-prev::before, .slick-next::before{
+  font-size: 55px !important;
+  z-index: 9999;
+}
+
+.slick-prev, .slick-next{
+  margin-top: 50px;
+  top: 100% !important;
+}
+
+.slick-prev{
+  left: 100px !important;
+}
+
+.slick-next{
+  right: 100px !important;
+}
+
+.slick-slide{
+  outline: none;
+}
+
+.slick-dots li button::before{
+  margin-top: 50px;
+  font-size: 10px !important;
+  border: 3px solid #fff ;
+  border-radius: 50px;
+  color: #f1a949 !important;
+}
+
+.slick-dots li.slick-active button::before{
+  color: #f6df51 !important;
+  opacity: 1;
+}
+
+/* ================================== CSS LOGIN USER ==================================== */
+
+.login-user{
+  width: 100%;
+  height: 100vh;
+  background-image: url(../assets/bg2.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  justify-content: flex-end;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.card-login{
+  background: #f6df51;
+  border-radius: 30px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.304);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 100px;
+  padding: 30px 20px;
+}
+
+.form-control-login{
+  width: 100%;
+  height: 55px;
+  background: #fff;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  padding-top: 30px;
+  padding-left: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #11101d;
+  margin-bottom: 20px;
+}
+
+.form-control-login::placeholder{
+  color: #11101d;
+  font-weight: 500;
+}
+
+.btn-lg{
+  width: 100%;
+  height: 50px;
+  background: #11101d;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  padding: 0 20px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.304);
+}
+
+.btn-lg:hover{
+  background-color: #111;
+  transform: translateY(5px);
+}
+
+.invalid-feedback{
+  color: #ff0000;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+
+.footer-login{
+  position: relative;
+  width: 100%;
+  background: #1d1b31;
+  height: 100px;
+  padding: 20px 50px;
+}
+
+.footer-login .wave{
+  position: absolute;
+  top: -80px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background:url(../assets/wave.png);
+  background-size: 1000px 100px;
+}
+
+.footer-login .waves #wave1{
+  z-index: 1000;
+  opacity: 1;
+  bottom: 0;
+  animation: animateWave 4s linear infinite;
+}
+
+.footer-login .waves #wave2{
+  z-index: 999;
+  opacity: 0.5;
+  bottom: 10px;
+  animation: animateWave_02 4s linear infinite;
+}
+
+@keyframes animateWave{
+  
+  0%{
+   background-position-x: 1000px;
+  }
+
+  100%{
+    background-position-x: 0px;
+  }
+}
+
+@keyframes animateWave_02{
+  
+  0%{
+   background-position-x: 0px;
+  }
+
+  100%{
+    background-position-x: 1000px;
+  }
+}
+
+/* ================================== CSS PAGE USER ==================================== */
+
+
+/* banner bg main start */
+.banner_bg_main {
+  width: 100%;
+  position: relative;
+  
+  float: left;
+  background-image: url(../assets/bg3.png);
+  height: 35vh;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.banner_bg_main::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.234), rgba(255, 255, 255, 0));
+
+}
+/* banner bg main end */
+
+
+/* header top section start */
+.header_section_top {
+  width: 100%;
+  float: left;
+  background-color: #2b2a29;
+  clip-path: polygon(0 0, 100% 0, 96% 100%, 3% 100%);
+  height: auto;
+  padding: 10px 0px;
+}
+
+.custom_menu {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+/* header top section end */
+
+
+/* header section start */
+.header_section {
+  width: 100%;
+  display: flex;
+}
+
+.containt_main {
+  display: flex;
+}
+
+
+/* opennav bar start */
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #ffffff;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f26522;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {
+      padding-top: 15px;
+  }
+  .sidenav a {
+      font-size: 18px;
+  }
+}
+
+.toggle_icon {
+  cursor: pointer;
+  color: #ffffff;
+  order: 2;
+  z-index: 1;
+}
+
+.header_box {
+  order: 2;
+  display: flex;
+}
+
+.btn-secondary {
+  color: #fff;
+  height: 40px;
+  width: 50px;
+  background-color: #f26522;
+  border: none;
+  border-top-right-radius: 20px;
+}
+
+.btn-search:hover{
+  background: rgb(0, 0, 0);
+}
+
+.show>.btn-secondary.dropdown-toggle:focus {
+  box-shadow: none;
+}
+/* opennav bar end */
+
+
+/* Styles for wrapping the search box start */
+.main {
+  flex: 1;
+  margin: 0px 30px;
+  display: inline-block;
+  order: 2;
+}
+
+.form-control-search {
+  justify-content: center;
+  width: 100%;
+}
+
+.form-control-search-input{
+  position: relative;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  height: 40px;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  border: 1px solid #ced4da;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.form-control-search:focus {
+  border: none !important;
+}
+
+.form-control-search::placeholder{
+  padding-left: 20px;
+  font-size: 20px;
+  color: #111;
+  font-weight: 500;
+}
+
+/* Bootstrap 4 text input with search icon */
+.has-search .form-control {
+  padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #aaa;
+}
+/* Styles for wrapping the search box end */
+
+.login_menu {
+  display: flex;
+  text-align: right;
+  float: right;
+  z-index: 1;
+}
+
+.login_menu ul {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+
+.login_menu li {
+  float: left;
+  font-size: 20px;
+  color: #ffffff;
+  text-transform: uppercase;
+  padding-left: 10px;
+  padding-top: 4px;
+  
+}
+
+.login_menu li a {
+  color: #000000;
+  text-decoration: none;
+}
+
+
+.login_menu li a:hover {
+  color: #f26522;
+}
+
+.nama-user{
+  color: #000000;
+  font-size: 20px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.btn-logout{
+  color: #000000;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  background: #f26522;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.btn-logout:hover{
+  background: #000000;
+  color: #f26522;
+}
+
+/* header section end */
+
+
+
+/* ================================== CSS MAIN CONTENT ==================================== */
+
+.main-content{
+  width: calc(100% - 260px);
+  margin-left: 150px;
+}
+
+.card-produk{
+  position: relative;
+  width: 250px;
+  height: 350px;
+  background-color: #232323;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(136, 136, 136, 0.689);
+}
+
+.card-produk::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.card-produk::after{
+  content: 'JTK';
+  position: absolute;
+  top: 40%;
+  left: -10%;
+  font-size: 12em;
+  font-weight: 800;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.04);
+}
+
+.img-produk{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 100%;
+  height: 180px;
+  transition: 0.5s;
+}
+
+.card-produk:hover .img-produk{
+  top: 0%;
+  transform: translateY(0%);
+}
+
+.content-produk{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  text-align: center;
+  transition: 1s;
+  z-index: 10;
+}
+
+.card-produk:hover .content-produk{
+  height: 150px;
+}
+
+.card-produk .content-produk h2{
+  position: relative;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #fff;
+
+}
+
+.card-produk .content-produk h3{
+  color: #fff;
+  font-weight: 300;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.card-produk .content-produk a{
+  display: inline-block;
+  padding: 10px 20px;
+  background: #fff;
+  border-radius: 20px;
+  margin-top: 10px;
+  font-weight: 600;
+  color: #111;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: 0.5s;  
+}
+
+.card-produk:hover .content-produk a{
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+
+/* ================================== CSS DETAIL PRODUCT ==================================== */
+
+.detail-produk{
+  position: relative;
+  margin-top: 300px;
+  margin-left: 70px;
+}
+
+.card-detail-produk{
+  position: relative;
+  width: 90%;
+  height: 350px;
+  border: 1px solid #f1a949;
+  background-color: #FFD52E;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(136, 136, 136, 0.689);
+}
+
+.judul-produk{
+  font-size: 40px;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.stok-produk{
+  font-size: 20px;
+  font-weight: 500;
+  font-style: italic;
+  margin-bottom: 50px;
+}
+
+.label-jumlah-barang{
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.btn-pinjam{
+  width: 100px;
+  height: 40px;
+  background-color: #f1a949;
+  border-radius: 20px;
+  font-size: 15px;
+  font-weight: 500;
+  margin-left: 30%;
+}
+
+.btn-batal{
+  width: 100px;
+  height: 40px;
+  background-color: #f15f49;
+  border-radius: 20px;
+  font-size: 15px;
+  font-weight: 500;
+  margin-left: 10px;
+}
+
+.btn-batal a{
+  color: black;
+  text-decoration: none;
+}
+
+/* ================================= CSS DETAIL PINJAMAN =================================== */
+
+.detail-pinjaman{
+  margin-top: 300px;
+}
+
+.card-detail-pinjaman{
+  position: relative;
+  width: 90%;
+  min-height: 400px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(136, 136, 136, 0.689);
+  padding: 10px 30px;
+}
+
+.btn-konfirmasi-pinjam{
+  width: 100px;
+  height: 40px;
+  background-color: #f1a949;
+  border-radius: 20px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.btn-konfirmasi-pinjam a{
+  color: black !important;
+  text-decoration: none;
+}
+
+.btn-kembali{
+  width: 100px;
+  height: 40px;
+  background-color: #f15f49;
+  border-radius: 20px;
+  font-size: 15px;
+  font-weight: 500;
+  margin-left: 10px;
+}
+
+ .btn-kembali a{
+  color: black;
+  text-decoration: none;
+}
