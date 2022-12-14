@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('NIM_NIDN');
             $table->boolean('status')->default(true);
             $table->boolean('is_siswa')->default(true);
+            $table->timestamps();
         });
     }
 

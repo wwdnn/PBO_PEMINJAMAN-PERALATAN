@@ -2,15 +2,17 @@
 
 namespace App\DataTables;
 
-use App\Models\Product as Barang;
+use App\Models\User as Dosen;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
+use Yajra\DataTables\Html\Editor\Editor;
+use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class BarangDataTable extends DataTable
+class DosenDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,27 +23,27 @@ class BarangDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-        ->addColumn('action', function ($data) {
-            $button ='<a href="'.route('barang.edit', $data->id).'" class="btn btn-primary btn-xs">Edit</a>';
-            $button .= '&nbsp;&nbsp;';
-            $button .= '<form action="'.route('barang.destroy', $data->id).'" method="post" style="display:inline">
-            '.csrf_field().'
-            '.method_field('DELETE').'
-            <button type="submit" class="btn btn-danger btn-xs">Delete</button>
-            </form>';
-            return $button;
-        });
+        ->editColumn('status_dosen', function ($data) {
+            if ($data->status == 1) {
+                $data = '<span class="btn btn-success">Aktif</span>';
+            } else {
+                $data = '<span class="btn btn-danger">Tidak Aktif</span>';
+            }
+            return $data;
+        })
+        ->rawColumns(['status_dosen']);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Barang $model
+     * @param \App\Models\Dosen $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Barang $model): QueryBuilder
-    {   
-        return $model->newQuery();
+    public function query(Dosen $model): QueryBuilder
+    {
+        return $model->newQuery()
+                     ->where('is_siswa', 0);
     }
 
     /**
@@ -52,7 +54,7 @@ class BarangDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('barang-table')
+                    ->setTableId('mahasiswa-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->lengthMenu([[10, 25, 50, 100, -1], [10, 25, 50, 100, 'All']])
@@ -80,16 +82,14 @@ class BarangDataTable extends DataTable
     {
         return [
             Column::make('id')
-                  ->title('ID'),
-            Column::make('kode_barang'),
-            Column::make('nama_barang'),
-            Column::make('stok_barang'),
-            Column::make('status_barang'),
-            Column::make('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->searchable(false)
-                  ->addClass('text-center'),
+                    ->title('ID'),
+            Column::make('NIM_NIDN')
+                    ->title('NIDN'),
+            Column::make('name')
+                    ->title('Nama Dosen'),
+            Column::make('status_dosen')
+                    ->title('Status Dosen')
+                    ->addClass('text-center'),
         ];
     }
 
@@ -100,6 +100,6 @@ class BarangDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Barang_' . date('YmdHis');
+        return 'Dosen_' . date('YmdHis');
     }
 }

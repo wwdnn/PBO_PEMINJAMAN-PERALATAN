@@ -47,6 +47,10 @@ Route::prefix('petugas_peralatan')->group(function () {
     Route::get('/', [App\Http\Controllers\PetugasPeralatanController::class, 'index']);
     Route::get('/dashboard', [App\Http\Controllers\PetugasPeralatanController::class, 'index'])->name('petugas_peralatan.dashboard');
 
+    // URL for Mahasiswa & Dosen
+    Route::get('/mahasiswa', [App\Http\Controllers\PageUserController::class, 'getUser'])->name('petugas_peralatan.mahasiswa');
+    Route::get('/dosen', [App\Http\Controllers\PageUserController::class, 'getDosen'])->name('petugas_peralatan.dosen');
+
     // URL for Barang
     Route::get('/barang', [App\Http\Controllers\BarangController::class, 'index'])->name('barang.index');
     Route::get('/barang/create', [App\Http\Controllers\BarangController::class, 'create'])->name('barang.create');

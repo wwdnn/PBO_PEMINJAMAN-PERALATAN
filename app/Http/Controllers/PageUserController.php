@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Alert;
 use Illuminate\Http\Request;
+use App\DataTables\MahasiswaDataTable;
+use App\DataTables\DosenDataTable;
 
 class PageUserController extends Controller
 {
@@ -33,4 +35,13 @@ class PageUserController extends Controller
         return view('products.show', compact('products'));
     }
 
+    public function getUser(MahasiswaDataTable $dataTable)
+    {
+        return $dataTable->render('petugas_peralatan.mahasiswa');
+    }
+
+    public function getDosen(DosenDataTable $dataTable)
+    {
+        return $dataTable->render('petugas_peralatan.dosen');
+    }
 }

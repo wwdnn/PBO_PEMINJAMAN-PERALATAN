@@ -34,14 +34,14 @@
             </li>
 
             <li class="">
-                <a href="#">
+                <a href="{{route('petugas_peralatan.mahasiswa')}}">
                     <i class='bx bx-home icon'></i>
                     <span class="text nav-text">Mahasiswa</span>
                 </a>
             </li>
 
             <li class="">
-                <a href="#">
+                <a href="{{route('petugas_peralatan.dosen')}}">
                     <i class='bx bx-home icon'></i>
                     <span class="text nav-text">Dosen</span>
                 </a>

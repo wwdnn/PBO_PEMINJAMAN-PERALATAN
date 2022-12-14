@@ -6,9 +6,9 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\BarangImport;
+use App\Imports\PetugasPeralatanImport;
 
-class BarangSeeder extends Seeder
+class PetugasPeralatanSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,6 +18,6 @@ class BarangSeeder extends Seeder
     public function run()
     {
         // import data from excel file
-        Excel::import(new BarangImport, 'public/dummy/barang.xlsx');
+        Excel::import(new PetugasPeralatanImport, 'public/dummy/petugas_peralatan.xlsx');
     }
 }

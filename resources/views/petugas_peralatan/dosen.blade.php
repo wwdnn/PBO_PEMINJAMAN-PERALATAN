@@ -9,7 +9,7 @@
 @section('content-petugas')
     <div class="container table-container">
         <div class="card bg-light border-3 border-primary table-card">
-            <div class="card-header table-card-header">Data Barang</div>
+            <div class="card-header table-card-header">Data Dosen</div>
             <div class="card-body table-card-body">
                 {{ $dataTable->table() }}
             </div>
