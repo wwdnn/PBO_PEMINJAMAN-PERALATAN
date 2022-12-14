@@ -13,6 +13,9 @@ class PetugasPeralatanController extends Controller
 
     public function index()
     {
-        return view('petugas_peralatan.home');
+        // get current authenticated user
+        $petugas = auth()->user();
+
+        return view('petugas_peralatan.home')->with('petugas', $petugas);
     }
 }

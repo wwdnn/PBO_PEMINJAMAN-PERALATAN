@@ -30,7 +30,9 @@ class BarangDataTable extends DataTable
             <button type="submit" class="btn btn-danger btn-xs">Delete</button>
             </form>';
             return $button;
-        });
+        })
+        
+        ->rawColumns(['action']);
     }
 
     /**

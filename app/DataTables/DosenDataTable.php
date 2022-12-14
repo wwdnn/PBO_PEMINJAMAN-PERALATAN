@@ -31,6 +31,7 @@ class DosenDataTable extends DataTable
             }
             return $data;
         })
+        
         ->rawColumns(['status_dosen']);
     }
 
