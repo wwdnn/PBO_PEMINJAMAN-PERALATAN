@@ -21,6 +21,8 @@ class User extends Authenticatable
     protected $fillable = [
         'NIM_NIDN',
         'name',
+        'status',
+        'is_siswa'
     ];
 
     /**

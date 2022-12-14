@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-use App\Models\Barang;
+use App\Models\Product as Barang;
 
 class DatabaseSeeder extends Seeder
 {

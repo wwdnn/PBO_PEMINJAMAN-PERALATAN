@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\Barang;
+use App\Models\Product as Barang;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -21,8 +21,16 @@ class BarangDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'barang.action')
-            ->setRowId('id');
+        ->addColumn('action', function ($data) {
+            $button ='<a href="'.route('barang.edit', $data->id).'" class="btn btn-primary btn-xs">Edit</a>';
+            $button .= '&nbsp;&nbsp;';
+            $button .= '<form action="'.route('barang.destroy', $data->id).'" method="post" style="display:inline">
+            '.csrf_field().'
+            '.method_field('DELETE').'
+            <button type="submit" class="btn btn-danger btn-xs">Delete</button>
+            </form>';
+            return $button;
+        });
     }
 
     /**
@@ -47,7 +55,10 @@ class BarangDataTable extends DataTable
                     ->setTableId('barang-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('Blfrtip')
+                    ->lengthMenu([[10, 25, 50, 100, -1], [10, 25, 50, 100, 'All']])
+                    ->language ([
+                        'url' => '//cdn.datatables.net/plug-ins/1.10.21/i18n/Indonesian.json'
+                    ])
                     ->orderBy(1)
                     ->selectStyleSingle()
                     ->buttons([
@@ -55,7 +66,9 @@ class BarangDataTable extends DataTable
                         Button::make('csv'),
                         Button::make('pdf'),
                         Button::make('print'),
-                    ]);
+                    ])
+                    // button, length, filtering, processing, table, info, pagination
+                    ->dom('Blfrtip');
     }
 
     /**
@@ -69,20 +82,12 @@ class BarangDataTable extends DataTable
             Column::make('id'),
             Column::make('kode_barang'),
             Column::make('nama_barang'),
-            // make column stok_barang > 10
-            Column::make('stok_barang')
-                  ->title('Stok Barang')
-                  ->searchable(false)
-                  ->orderable(false)
-                  ->footer('Total')
-                  ->footer(function ($query) {
-                      return $query->sum('stok_barang');
-                  }),
+            Column::make('stok_barang'),
             Column::make('status_barang'),
             Column::computed('action')
-                  ->exportable(true)
-                  ->printable(true)
-                  ->width(60)
+                  ->exportable(false)
+                  ->printable(false)
+                  ->searchable(false)
                   ->addClass('text-center'),
         ];
     }

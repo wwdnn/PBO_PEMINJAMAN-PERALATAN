@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 // Request
 use Illuminate\Http\Request;
 // Models
-use App\Models\Barang;
+use App\Models\Product as Barang;
 // Log
 use Illuminate\Support\Facades\Log;
 // MPDF

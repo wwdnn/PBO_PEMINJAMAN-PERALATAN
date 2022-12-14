@@ -6,7 +6,7 @@
     <h1 class="m-0 text-dark">Edit barang</h1>
 @stop
 
-@section('content')
+@section('content-petugas')
     <form action="{{route('barang.update', $barang)}}" method="post">
         @method('PUT')
         @csrf
