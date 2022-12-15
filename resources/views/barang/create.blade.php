@@ -36,6 +36,8 @@
                         @error('status_barang') <span class="text-danger">{{$message}}</span> @enderror
                     </div>
 
+                    <div class=
+
                 </div>
 
                 <div class="card-footer">
