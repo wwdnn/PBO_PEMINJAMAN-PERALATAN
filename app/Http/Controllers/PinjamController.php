@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\PinjamanDetail;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Alert;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
 
 class PinjamController extends Controller
@@ -30,6 +30,12 @@ class PinjamController extends Controller
             return redirect()->back();
         }
 
+        if($request->jumlah_barang <= 0)
+        {
+            Alert::error('Gagal Dipinjam', 'Jumlah Barang Yang Dipinjam Tidak Boleh Kurang Dari 1');
+            return redirect()->back();
+        }
+
         // Cek Validasi
         $cek_pinjaman = Peminjaman::where('id_user', Auth::user()->id)->where('status_peminjaman', 'Konfirmasi')->first();
 
@@ -48,7 +54,7 @@ class PinjamController extends Controller
             }
             else
             {
-                Alert::error('Gagal Dipinjam', 'Anda Sudah Meminjam Barang Hari Ini');
+                alert()->error('Gagal Dipinjam', 'Anda Sudah Meminjam Barang Hari Ini');
                 return redirect()->back();
             }
             
@@ -74,10 +80,20 @@ class PinjamController extends Controller
         {
             $pinjaman_detail = PinjamanDetail::where('id_barang', $product->id)->where('id_pinjaman', $Pinjaman_baru->id)->first();
 
-            $pinjaman_detail->jumlah_barang = $pinjaman_detail->jumlah_barang + $request->jumlah_barang;
+            // jumlah barang yang di pinjam
+            if($pinjaman_detail->jumlah_barang + $request->jumlah_barang > $product->stok_barang)
+            {
+                alert()->error('Gagal Dipinjam', 'Anda Telah Meminjam Melebihi Stok Barang Lihat Keranjang');
+                return redirect()->back();
+            } else 
+            {
+                $pinjaman_detail->jumlah_barang = $pinjaman_detail->jumlah_barang + $request->jumlah_barang;
 
-            // update jumlah
-            $pinjaman_detail->update();
+                // update jumlah
+                $pinjaman_detail->update();
+            }
+
+          
         }
 
         // alert success
@@ -108,6 +124,11 @@ class PinjamController extends Controller
         $peminjaman = Peminjaman::where('id', $pinjaman_detail->id_pinjaman)->first();
         $pinjaman_detail->delete();
 
+        if($peminjaman->pinjaman_details->count() == 0)
+        {
+            $peminjaman->delete();
+        }
+
         Alert::error('Berhasil Dihapus', 'Barang Yang Dipinjam Berhasil Dihapus');
         return redirect('cart-peminjaman');
     }
@@ -125,6 +146,7 @@ class PinjamController extends Controller
     {
         $user = User::where('id', Auth::user()->id)->first();
 
+        
         $peminjaman = Peminjaman::where('id_user', Auth::user()->id)->where('status_peminjaman','Konfirmasi')->first();
         
         $id_pinjaman = $peminjaman->id;
@@ -135,8 +157,15 @@ class PinjamController extends Controller
 
         foreach ($pinjaman_details as $pinjaman_detail) {
             $product = Product::where('id', $pinjaman_detail->id_barang)->first();
+
             $product->stok_barang = $product->stok_barang - $pinjaman_detail->jumlah_barang;
+
+            if($product->stok_barang = 0){
+                $product->status_barang = "Habis";
+            }
+
             $product->update();
+
             $pinjaman_detail->status_pinjam_barang = "Terpinjam";
             $pinjaman_detail->update();
         }

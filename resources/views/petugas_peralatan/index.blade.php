@@ -1,5 +1,4 @@
 @extends('petugas_peralatan.template')
-
 @section('main-content')
 <nav class="sidebar close">
     <header>
@@ -132,7 +131,7 @@ body.dark{
     padding: 10px 14px;
     background: var(--sidebar-color);
     transition: var(--tran-05);
-    z-index: 100;
+    z-index: 1;
 }
 
 .sidebar.close{

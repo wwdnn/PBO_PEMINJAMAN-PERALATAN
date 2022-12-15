@@ -1,35 +1,39 @@
 @extends('petugas_peralatan.index')
+
+@section('title', 'List Peminjam barang')
+
+@section('content_header')
+    <h1 class="m-0 text-dark">List Peminjam barang</h1>
+@stop
+
 @section('content-petugas')
-<div class="pengembalian-barang">
-  <div class="container">
-    <div class="table">
-      <div class="table-header">
-        <h3>Pengembalian Barang</h3>
-      </div>
-      <div class="table-body">
-        <table class="table">
-          <thead>
-            <tr class="text-center">
-              <th>No</th>
-              <th>Nama Peminjam</th>
-              <th>Tanggal Peminjaman</th>
-              <th>Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php $no = 1; ?>
-            @foreach($peminjamans as $peminjam)
-            <tr class="text-center">                     
-              <td>{{ $no++ }}</td>
-              <td>{{$peminjam->id}}-{{ $peminjam->User->name }}</td>
-              <td>{{ $peminjam->tanggal_peminjaman }}</td>
-              {{-- <td>{{ $peminjam->PinjamanDetail->id_pinjaman}}</td> --}}
-              <td>
-                <a href="{{url('petugas_peralatan/pengembalian-detail')}}/{{$peminjam->id}}" class="btn">Detail</a>
-              </td>
-            </tr>
-            @endforeach
+    <div class="container table-container">
+        <div class="card bg-light border-3 border-primary table-card">
+            <div class="card-header table-card-header">List Peminjam Barang</div>
+            <div class="card-body table-card-body">
+                {{ $dataTable->table() }}
+            </div>
+        </div>
     </div>
-  </div>
-</div>
-@endsection
+@stop
+
+<style scoped>
+    .table-card {
+        margin-top : 20px;
+    }
+
+    .table-card-header{
+        justify-content: center;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        color: blue;
+        font-weight: 600;
+        font-size: 20px;
+    }
+</style>
+
+@push('scripts')
+    {{ $dataTable->scripts() }}
+    <script>
+    </script>
+@endpush

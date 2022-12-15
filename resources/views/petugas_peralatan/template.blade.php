@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petugas Peralatan</title>
+    <link rel="icon" href="{{url('assets')}}/Logo_HIMAKOM.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,7 +29,10 @@
     
 </head>
 <body>
-    @yield('main-content')  
+    @yield('main-content') 
+
+    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+
     @stack('scripts')
 </body>
 </html>

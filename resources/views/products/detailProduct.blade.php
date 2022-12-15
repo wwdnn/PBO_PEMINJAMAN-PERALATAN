@@ -14,11 +14,6 @@
         </div>
 
         <div class="col-md-6">
-          {{-- <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center p-4"> 
-              <a href="{{url('dashboard-user')}}" class="btn btn-primary">Kembali</a>
-            </div>
-          </div> --}}
           
           <!--  -->
           <div class="product p-4">

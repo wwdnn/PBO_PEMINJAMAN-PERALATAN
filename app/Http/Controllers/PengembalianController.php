@@ -7,16 +7,21 @@ use App\Models\PinjamanDetail;
 use App\Models\Peminjaman;
 use App\Models\Pengembalian;
 use App\Models\Product;
-use Alert;
+use RealRashid\SweetAlert\Facades\Alert;
 use Carbon\Carbon;
-
+use App\DataTables\PengembalianDataTable;
+use App\Models\User;
+use Dflydev\DotAccessData\Data;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\SessionGuard;
+use Illuminate\Contracts\Session\Session;
+use Mpdf\Tag\Dd;
 
 class PengembalianController extends Controller
 {
-    public function pengembalian()
+    public function pengembalian(PengembalianDataTable $dataTable)
     {
-        $peminjamans = Peminjaman::where('status_peminjaman', 'Terpinjam')->get();
-        return view('petugas_peralatan.pengembalianBarang', compact('peminjamans'));
+        return $dataTable->render('petugas_peralatan.pengembalianBarang');
     }
 
     public function detailPengembalian(Request $request, $id)
@@ -30,6 +35,7 @@ class PengembalianController extends Controller
             // update status peminjaman
             $peminjaman->status_peminjaman = "Dikembalikan";
             $peminjaman->save();
+            Alert::success('Berhasil', 'Barang Sudah Dikembalikan');
             return redirect('/petugas_peralatan/pengembalian-barang');
         }
         else
@@ -41,28 +47,53 @@ class PengembalianController extends Controller
     }
 
     public function pengembalianBarang(Request $request)
-    {
+    {   
         //tanggal pengembalian
         $tanggal_pengembalian = Carbon::now()->format('Y-m-d');
         // update stok barang
         $pinjaman_detail = PinjamanDetail::where('id_barang', $request->id_barang)->first();
+
+        if($request->jumlah_barang_dikembalikan > $pinjaman_detail->jumlah_barang)
+        {
+            Alert::error('Maaf', 'Jumlah Barang Yang Dikembalikan Tidak Boleh Lebih Dari Jumlah Barang Yang Dipinjam');
+            return redirect()->back();
+        }
+        else if ($request->jumlah_barang_dikembalikan <= 0){
+            Alert::error('Maaf', 'Jumlah Barang Yang Dikembalikan Tidak Boleh Kurang Dari 1');
+            return redirect()->back();
+        }
         
         if($request->status == "Dikembalikan")
         {
             $product = Product::where('id', $request->id_barang)->first();
-            $product->stok_barang = $product->stok_barang + $pinjaman_detail->jumlah_barang;
+            $product->stok_barang = $product->stok_barang + $request->jumlah_barang_dikembalikan;
             $product->save();
 
             // update status pinjam barang
-            $pinjaman_detail->status_pinjam_barang = $request->status;
-            $pinjaman_detail->save();
+            if($pinjaman_detail->jumlah_barang == $request->jumlah_barang_dikembalikan)
+            {
+                $pinjaman_detail->status_pinjam_barang = "Dikembalikan";
+                $pinjaman_detail->save();
+            }
+            else
+            {
+                $pinjaman_detail->jumlah_barang = $pinjaman_detail->jumlah_barang - $request->jumlah_barang_dikembalikan;
+                $pinjaman_detail->save();
+            }
 
             // save to database pengembalian
             $pengembalian = new Pengembalian();
-            $pengembalian->id_petugas_peralatan = $pinjaman_detail->id_pinjaman;
+            $pengembalian->id_petugas_peralatan = $request->id_petugas_peralatan;
             $pengembalian->id_barang = $request->id_barang;
             $pengembalian->tanggal_pengembalian = $tanggal_pengembalian;
-            
+            $pengembalian->jumlah_barang_dikembalikan = $request->jumlah_barang_dikembalikan;
+            // $pengembalian->save();
+
+            Alert::success('Berhasil', 'Barang Berhasil Dikembalikan');
+        }
+        else
+        {
+            Alert::error('Maaf', 'Barang Belum Dikembalikan');
         }
         return redirect()->back();
     }
