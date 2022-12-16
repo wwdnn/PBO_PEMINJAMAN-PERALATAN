@@ -64,7 +64,7 @@
 <style scoped>
     .petugas{
         margin-top: 5rem;
-        margin-bottom: 5rem;
+        margin-bottom: 1.5rem;
         justify-content: center;
     }
 
@@ -101,60 +101,58 @@
     }
 
     .footer-login{
-  position: relative;
-  width: 95%;
-  background: #1d1b31;
-  height: 100px;
-  padding: 20px 50px;
-}
+        position: relative;
+        width: 95%;
+    }
 
-.footer-login .wave{
-  position: absolute;
-  top: -80px;
-  left: 0;
-  width: 100%;
-  height: 100px;
-  background:url(../assets/wave.png);
-  background-size: 1000px 100px;
-}
+    .footer-login .wave{
+        position: absolute;
+        overflow: hidden;
+        top: -80px;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background:url(../assets/wave_.png);
+        background-size: 1000px 100px;
+    }
 
-.footer-login .waves #wave1{
-  z-index: 1000;
-  opacity: 1;
-  bottom: 0;
-  animation: animateWave 4s linear infinite;
-}
+    .footer-login .waves #wave1{
+        z-index: 1000;
+        opacity: 1;
+        bottom: 0;
+        animation: animateWave 4s linear infinite;
+    }
 
-.footer-login .waves #wave2{
-  z-index: 999;
-  opacity: 0.5;
-  bottom: 10px;
-  animation: animateWave_02 4s linear infinite;
-}
+    .footer-login .waves #wave2{
+        z-index: 999;
+        opacity: 0.5;
+        bottom: 10px;
+        animation: animateWave_02 4s linear infinite;
+    }
 
-@keyframes animateWave{
+    @keyframes animateWave{
 
-  0%{
-   background-position-x: 1000px;
-  }
+        0%{
+        background-position-x: 1000px;
+        }
 
-  100%{
-    background-position-x: 0px;
-  }
-}
+        100%{
+            background-position-x: 0px;
+        }
+    }
 
-@keyframes animateWave_02{
+    @keyframes animateWave_02{
 
-  0%{
-   background-position-x: 0px;
-  }
+        0%{
+        background-position-x: 0px;
+        }
 
-  100%{
-    background-position-x: 1000px;
-  }
-}
+        100%{
+            background-position-x: 1000px;
+        }
+    }
 
-.test{
-    margin-top: 120px;
-}
+    .test{
+        margin-top: 120px;
+    }
 </style>
