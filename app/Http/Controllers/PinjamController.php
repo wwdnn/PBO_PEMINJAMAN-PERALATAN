@@ -47,23 +47,34 @@ class PinjamController extends Controller
 
         if(empty($cek_pinjaman))
         {
-            $cek_tanggal_pinjam = Peminjaman::where('id_user', Auth::user()->id)->where('tanggal_peminjaman', $tanggal)->first();
-            
-            if(empty($cek_tanggal_pinjam) || $cek_tanggal_pinjam->status_peminjaman == "Dikembalikan")
+            $cek_status_pinjam = Peminjaman::where('id_user', Auth::user()->id)->where('status_peminjaman', 'Terpinjam')->first();
+
+            if(empty($cek_status_pinjam))
             {
-                // simpan ke database
-                $pinjaman = new Peminjaman();
-                $pinjaman->id_user = Auth::user()->id;
-                $pinjaman->status_peminjaman = "Konfirmasi";
-                $pinjaman->tanggal_peminjaman = $tanggal;
-                $pinjaman->save();
+                
+                $cek_tanggal_pinjam = Peminjaman::where('id_user', Auth::user()->id)->where('tanggal_peminjaman', $tanggal)->first();
+                
+                if(empty($cek_tanggal_pinjam) || $cek_tanggal_pinjam->status_peminjaman == "Dikembalikan")
+                {
+                    // simpan ke database
+                    $pinjaman = new Peminjaman();
+                    $pinjaman->id_user = Auth::user()->id;
+                    $pinjaman->status_peminjaman = "Konfirmasi";
+                    $pinjaman->tanggal_peminjaman = $tanggal;
+                    $pinjaman->save();
+                }
+                else
+                {
+                    alert()->error('Gagal Dipinjam', 'Anda Sudah Meminjam Barang Hari Ini');
+                    return redirect()->back();
+                }
+            
             }
             else
             {
-                alert()->error('Gagal Dipinjam', 'Anda Sudah Meminjam Barang Hari Ini');
+                alert()->error('Gagal Dipinjam', 'Anda Sedang Lagi Meminjam Barang');
                 return redirect()->back();
             }
-            
         }
 
 
