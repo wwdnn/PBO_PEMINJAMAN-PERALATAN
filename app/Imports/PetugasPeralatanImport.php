@@ -18,7 +18,8 @@ class PetugasPeralatanImport implements ToModel
         return new PetugasPeralatan([
             'nama_petugas' => $row[0],
             'username' => $row[1],
-            'password' => Hash::make($row[2])
+            'password' => Hash::make($row[2]),
+            'email' => $row[3],
         ]);
     }
 }

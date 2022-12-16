@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\PetugasPeralatan;
 
 class PetugasPeralatanController extends Controller
 {
@@ -15,7 +16,12 @@ class PetugasPeralatanController extends Controller
     {
         // get current authenticated user
         $petugas = auth()->user();
-
         return view('petugas_peralatan.home')->with('petugas', $petugas);
+    }
+    
+    public function getEmailPetugas()
+    {
+        $petugas = PetugasPeralatan::all();
+        return $petugas;
     }
 }

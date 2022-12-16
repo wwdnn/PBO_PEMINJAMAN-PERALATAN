@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nama_petugas', 50)->unique()->comment('Nama petugas peralatan')->nullable(false);
             $table->string('username', 30)->unique()->comment('Username petugas peralatan')->nullable(false);
             $table->string('password', 500)->unique()->comment('Password petugas peralatan')->nullable(false);
+            $table->string('email', 50)->unique()->comment('Email petugas peralatan')->nullable(false);
             $table->timestamps();
         });
     }

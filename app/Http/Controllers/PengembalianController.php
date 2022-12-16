@@ -45,7 +45,8 @@ class PengembalianController extends Controller
     }
 
     public function pengembalianBarang(Request $request)
-    {   
+    { 
+        
         //tanggal pengembalian
         $tanggal_pengembalian = Carbon::now()->format('Y-m-d');
         // update stok barang
@@ -81,11 +82,11 @@ class PengembalianController extends Controller
 
             // save to database pengembalian
             $pengembalian = new Pengembalian();
-            $pengembalian->id_petugas_peralatan = $request->id_petugas_peralatan;
+            $pengembalian->id_petugas_peralatan = Auth::user()->id;
             $pengembalian->id_barang = $request->id_barang;
             $pengembalian->tanggal_pengembalian = $tanggal_pengembalian;
             $pengembalian->jumlah_barang_dikembalikan = $request->jumlah_barang_dikembalikan;
-            // $pengembalian->save();
+            $pengembalian->save();
 
             Alert::success('Berhasil', 'Barang Berhasil Dikembalikan');
         }

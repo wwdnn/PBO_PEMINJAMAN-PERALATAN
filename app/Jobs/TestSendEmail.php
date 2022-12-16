@@ -10,7 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Mail\TestHelloMail;
 use Illuminate\Support\Facades\Mail;
-use App\Http\Controllers\BarangController;
+use App\Models\PetugasPeralatan;
 
 class TestSendEmail implements ShouldQueue
 {
@@ -33,7 +33,13 @@ class TestSendEmail implements ShouldQueue
      */
     public function handle()
     {
+        $petugas = PetugasPeralatan::all();
+
         $emailJobs = new TestHelloMail();
-        Mail::to(env('MAIL_FROM_ADDRESS'))->send($emailJobs);
+
+        // send email
+        foreach ($petugas as $petugas) {
+            Mail::to($petugas->email)->send($emailJobs);
+        }
     }
 }

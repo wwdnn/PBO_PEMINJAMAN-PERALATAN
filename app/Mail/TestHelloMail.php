@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Barang;
+use App\Models\PinjamanDetail;
 
 class TestHelloMail extends Mailable
 {
@@ -27,8 +27,8 @@ class TestHelloMail extends Mailable
     public function build()
     {
         // create list data barang
-        $barangs = Barang::all();
+        $peminjaman_details = PinjamanDetail::where('status_pinjam_barang', 'Terpinjam')->get();
         // return view('barangs.pdf', compact('barangs'));
-        return $this->view('barangs.pdf', compact('barangs'));
+        return $this->view('queue.dataPeminjamQueue', compact('peminjaman_details'));
     }
 }

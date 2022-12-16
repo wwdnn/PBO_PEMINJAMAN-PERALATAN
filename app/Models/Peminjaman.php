@@ -16,7 +16,7 @@ class Peminjaman extends Model
 
     function pinjaman_details()
     {
-        return $this->hasMany('App\Models\PinjamanDetail', 'id_peminjaman', 'id');
+        return $this->hasMany('App\Models\PinjamanDetail', 'id_pinjaman', 'id');
     }
 
 }

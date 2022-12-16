@@ -16,7 +16,7 @@
             <div class="card-body table-card-body">
                 {{ $dataTable->table() }}
                 <div class="queue mt-3">
-                  <a href="">Kirim Data Peminjam</a>
+                  <a href="{{route('queue.index')}}" onclick="return confirm('Anda Yakin Akan Mengirim Ke Semua Petugas?');">Kirim Data Peminjam</a>
                 </div>
             </div>
         </div>

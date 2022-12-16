@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\TestSendEmail;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
+use App\Models\PinjamanDetail;
+use Mpdf\Tag\Dd;
 
 class TestQueueEmails extends Controller
 {
@@ -14,6 +17,7 @@ class TestQueueEmails extends Controller
     {
         $emailJobs = new TestSendEmail();
         $this->dispatch($emailJobs);
+        Alert::success('Berhasil', 'Berhasil Mengirim Email Ke Semua Petugas Peralatan');
         return redirect()->back();
     }
 }

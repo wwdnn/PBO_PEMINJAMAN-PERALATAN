@@ -16,6 +16,6 @@ class PinjamanDetail extends Model
 
     function peminjaman()
     {
-        return $this->belongsTo('App\Models\Peminjaman', 'id_peminjaman', 'id');
+        return $this->belongsTo('App\Models\Peminjaman', 'id_pinjaman', 'id');
     }
 }

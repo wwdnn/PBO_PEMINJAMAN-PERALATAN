@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('id_petugas_peralatan');
             $table->integer('id_barang');
+            $table->integer('jumlah_barang_dikembalikan');
             $table->date('tanggal_pengembalian');
             $table->timeStamps();
             
