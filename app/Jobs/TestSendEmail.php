@@ -35,10 +35,9 @@ class TestSendEmail implements ShouldQueue
     {
         $petugas = PetugasPeralatan::all();
 
-        $emailJobs = new TestHelloMail();
-
         // send email
         foreach ($petugas as $petugas) {
+            $emailJobs = new TestHelloMail();
             Mail::to($petugas->email)->send($emailJobs);
         }
     }
