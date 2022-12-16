@@ -13,8 +13,6 @@ use App\DataTables\PengembalianDataTable;
 use App\Models\User;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Auth\SessionGuard;
-use Illuminate\Contracts\Session\Session;
 use Mpdf\Tag\Dd;
 
 class PengembalianController extends Controller

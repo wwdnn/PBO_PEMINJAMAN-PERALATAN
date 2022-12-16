@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\PinjamanDetail;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\DataTables\PeminjamDataTable;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,6 +18,11 @@ class PinjamController extends Controller
     {
         $products = Product::where('id', $id)->first();
         return view('products.detailProduct', compact('products'));
+    }
+
+    public function peminjam(PeminjamDataTable $dataTable)
+    {
+        return $dataTable->render('petugas_peralatan.pengembalianBarang');
     }
 
     public function pinjam(Request $request, $id)

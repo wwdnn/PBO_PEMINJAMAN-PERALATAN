@@ -47,6 +47,13 @@
             </li>
 
             <li class="">
+                <a href="{{route('petugas_peralatan.peminjam')}}">
+                    <i class='bx bx-home icon'></i>
+                    <span class="text nav-text">Peminjam</span>
+                </a>
+            </li>
+
+            <li class="">
                 <a href="{{route('petugas_peralatan.pengembalian')}}">
                     <i class='bx bx-home icon'></i>
                     <span class="text nav-text">Pengembalian</span>

@@ -60,6 +60,8 @@ Route::prefix('petugas_peralatan')->group(function () {
     Route::put('/barang/{id}', [App\Http\Controllers\BarangController::class, 'update'])->name('barang.update')->middleware('auth:petugas_peralatan');
     Route::delete('/barang/{id}', [App\Http\Controllers\BarangController::class, 'destroy'])->name('barang.destroy')->middleware('auth:petugas_peralatan');
 
+    Route::get('peminjam-barang', [App\Http\Controllers\PinjamController::class, 'peminjam'])->name('petugas_peralatan.peminjam')->middleware('auth:petugas_peralatan');
+
     Route::get('pengembalian-barang', [App\Http\Controllers\PengembalianController::class, 'pengembalian'])->name('petugas_peralatan.pengembalian')->middleware('auth:petugas_peralatan');
     Route::get('pengembalian-detail/{id}', [App\Http\Controllers\PengembalianController::class, 'detailPengembalian'])->name('petugas_peralatan.detailPengembalian')->middleware('auth:petugas_peralatan');
     Route::post('pengembalian-barang/{id}/{id_barang}', [App\Http\Controllers\PengembalianController::class, 'pengembalianBarang'])->name('petugas_peralatan.pengembalianBarang')->middleware('auth:petugas_peralatan');
