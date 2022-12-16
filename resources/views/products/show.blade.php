@@ -14,12 +14,12 @@
     </div>
   </div>
   @endforeach
+
+  @if(Route::getCurrentRoute()->uri() == 'dashboard-user')
+  <div class="d-flex justify-content-center">
+    {{ $products->links() }}
+  </div>
+  @endif
 </div>
 
-@endsection
-
-@section('style')
-<style>
-  
-</style>
 @endsection

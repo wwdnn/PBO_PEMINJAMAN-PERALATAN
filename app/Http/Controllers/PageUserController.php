@@ -7,12 +7,13 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
 use App\DataTables\MahasiswaDataTable;
 use App\DataTables\DosenDataTable;
+use Illuminate\Support\Facades\Route;
 
 class PageUserController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(20);
         return view('products.show', compact('products'));
     }
 

@@ -15,14 +15,14 @@ use Illuminate\Support\Facades\Auth;
 class PinjamController extends Controller
 {
     public function index($id)
-    {
+    {   
         $products = Product::where('id', $id)->first();
         return view('products.detailProduct', compact('products'));
     }
 
     public function peminjam(PeminjamDataTable $dataTable)
     {
-        return $dataTable->render('petugas_peralatan.pengembalianBarang');
+        return $dataTable->render('petugas_peralatan.dataPeminjam');
     }
 
     public function pinjam(Request $request, $id)
