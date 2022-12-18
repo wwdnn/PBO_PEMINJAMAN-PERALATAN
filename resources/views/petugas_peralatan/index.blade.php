@@ -27,36 +27,43 @@
 
             <li class="">
                 <a href="{{route('barang.index')}}">
-                    <i class='bx bx-home icon'></i>
+                    <i class='bx bxs-package icon' ></i>
                     <span class="text nav-text">Barang</span>
                 </a>
             </li>
 
             <li class="">
                 <a href="{{route('petugas_peralatan.mahasiswa')}}">
-                    <i class='bx bx-home icon'></i>
+                    <i class='bx bx-user-circle icon'></i>
                     <span class="text nav-text">Mahasiswa</span>
                 </a>
             </li>
 
             <li class="">
                 <a href="{{route('petugas_peralatan.dosen')}}">
-                    <i class='bx bx-home icon'></i>
+                    <i class='bx bxs-user-circle icon'></i>
                     <span class="text nav-text">Dosen</span>
                 </a>
             </li>
 
             <li class="">
                 <a href="{{route('petugas_peralatan.peminjam')}}">
-                    <i class='bx bx-home icon'></i>
+                    <i class='bx bx-food-menu icon' ></i>
                     <span class="text nav-text">Peminjam</span>
                 </a>
             </li>
 
             <li class="">
                 <a href="{{route('petugas_peralatan.pengembalian')}}">
-                    <i class='bx bx-home icon'></i>
+                    <i class='bx bxs-food-menu icon' ></i>
                     <span class="text nav-text">Pengembalian</span>
+                </a>
+            </li>
+
+            <li class="">
+                <a href="{{route('petugas_peralatan.log')}}">
+                    <i class='bx bx-server icon' ></i>
+                    <span class="text nav-text">Logs</span>
                 </a>
             </li>
         </div>

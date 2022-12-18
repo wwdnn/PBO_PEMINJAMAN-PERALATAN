@@ -55,7 +55,7 @@ class DosenDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('mahasiswa-table')
+                    ->setTableId('dosen-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->lengthMenu([[10, 25, 50, 100, -1], [10, 25, 50, 100, 'All']])

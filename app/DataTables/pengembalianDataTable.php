@@ -56,7 +56,11 @@ class pengembalianDataTable extends DataTable
                     ->minifiedAjax()
                     //->dom('Bfrtip')
                     ->orderBy(1)
-                    ->selectStyleSingle();
+                    ->selectStyleSingle()
+                    ->language ([
+                        'url' => '//cdn.datatables.net/plug-ins/1.10.21/i18n/Indonesian.json'
+                    ])
+                    ->dom('lfrtip');
     }
 
     /**

@@ -14,11 +14,12 @@ class PeminjamPeralatanImport implements ToModel
     */
     public function model(array $row)
     {
-        return new User([
-            'name' => $row[0],
-            'NIM_NIDN' => $row[1],
-            'status' => $row[2],
-            'is_siswa' => $row[3],
-        ]);
+        $user = new User();
+        $user->name = $row[0];
+        $user->NIM_NIDN = $row[1];
+        $user->status = $row[2];
+        $user->is_siswa = $row[3];
+
+        return $user;
     }
 }

@@ -14,12 +14,13 @@ class BarangImport implements ToModel
     */
     public function model(array $row)
     {
-        return new Product([
-            'kode_barang' => $row[0],
-            'nama_barang' => $row[1],
-            'stok_barang' => $row[2],
-            'status_barang' => $row[3],
-            'gambar_barang' => $row[4],
-        ]); 
+        $barang = new Product();
+        $barang->kode_barang = $row[0];
+        $barang->nama_barang = $row[1];
+        $barang->stok_barang = $row[2];
+        $barang->status_barang = $row[3];
+        $barang->gambar_barang = $row[4];
+
+        return $barang;
     }
 }

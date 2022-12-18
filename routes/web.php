@@ -41,9 +41,12 @@ Route::get('/search', [\App\Http\Controllers\PageUserController::class, 'search'
 
 // URL for Petugas Peralatan and give middleware to group
 Route::prefix('petugas_peralatan')->group(function () {
+    // URL for Login & Logout
     Route::get('/login-petugas', [App\Http\Controllers\Auth\PetugasPeralatanLoginController::class, 'showLoginForm'])->name('petugas_peralatan.login');
     Route::post('/login-petugas', [App\Http\Controllers\Auth\PetugasPeralatanLoginController::class, 'login'])->name('petugas_peralatan.login.submit');
     Route::get('/logout-petugas', [App\Http\Controllers\Auth\PetugasPeralatanLoginController::class, 'logout'])->name('petugas_peralatan.logout');
+    
+    // URL for Dashboard
     Route::get('/', [App\Http\Controllers\PetugasPeralatanController::class, 'index']);
     Route::get('/dashboard', [App\Http\Controllers\PetugasPeralatanController::class, 'index'])->name('petugas_peralatan.dashboard');
 
@@ -60,16 +63,21 @@ Route::prefix('petugas_peralatan')->group(function () {
     Route::put('/barang/{id}', [App\Http\Controllers\BarangController::class, 'update'])->name('barang.update')->middleware('auth:petugas_peralatan');
     Route::delete('/barang/{id}', [App\Http\Controllers\BarangController::class, 'destroy'])->name('barang.destroy')->middleware('auth:petugas_peralatan');
 
+    //pdf
+    Route::get('/barang-pdf', [App\Http\Controllers\BarangController::class, 'createPDF'])->name('barang.mpdf')->middleware('auth:petugas_peralatan');
+    
+    // URL for Peminjaman
     Route::get('peminjam-barang', [App\Http\Controllers\PinjamController::class, 'peminjam'])->name('petugas_peralatan.peminjam')->middleware('auth:petugas_peralatan');
 
+    // URL for Pengembalian
     Route::get('pengembalian-barang', [App\Http\Controllers\PengembalianController::class, 'pengembalian'])->name('petugas_peralatan.pengembalian')->middleware('auth:petugas_peralatan');
     Route::get('pengembalian-detail/{id}', [App\Http\Controllers\PengembalianController::class, 'detailPengembalian'])->name('petugas_peralatan.detailPengembalian')->middleware('auth:petugas_peralatan');
     Route::post('pengembalian-barang/{id}/{id_barang}', [App\Http\Controllers\PengembalianController::class, 'pengembalianBarang'])->name('petugas_peralatan.pengembalianBarang')->middleware('auth:petugas_peralatan');
+
+    // URL for Log
+    Route::get('log', [App\Http\Controllers\PetugasPeralatanController::class, 'getLog'])->name('petugas_peralatan.log')->middleware('auth:petugas_peralatan');
+    Route::get('log/{id}', [App\Http\Controllers\PetugasPeralatanController::class, 'getLogDetails'])->name('petugas_peralatan.logDetails')->middleware('auth:petugas_peralatan');
 });
-
-
-// pdf
-Route::get('mpdf', [App\Http\Controllers\BarangController::class, 'createPDF'])->name('mpdf');
 
 // jobs & queues for TestQueueEmail
 Route::get('queue', [App\Http\Controllers\TestQueueEmails::class, 'sendTestEmails'])->name('queue.index');

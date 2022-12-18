@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nama_barang', 50)->nullable(false);
             $table->integer('stok_barang')->nullable(false)->default(0);
             $table->string('status_barang', 15)->nullable(false);
-            $table->string('gambar_barang', 100)->nullable(false);
+            $table->string('gambar_barang', 200)->nullable(false);
             $table->timestamps();
         });
     }

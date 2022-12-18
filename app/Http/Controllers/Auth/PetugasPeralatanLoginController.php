@@ -24,7 +24,7 @@ class PetugasPeralatanLoginController extends Controller
         // Validate the form data
         $this->validate($request, [
             'username' => 'required|string',
-            'password' => 'required|string|min:6',
+            'password' => 'required|string',
         ]);
 
         // Attempt to log the user in
@@ -32,11 +32,9 @@ class PetugasPeralatanLoginController extends Controller
             // if successful, then redirect to their intended location
             return redirect()->intended(route('petugas_peralatan.dashboard'));
         } else {
-            dd(Auth::guard('petugas_peralatan')->attempt(['username' => $request->username, 'password' => $request->password]));
+            return redirect()->back()
+            ->with('error_message', 'Username atau password salah!');
         }
-
-        // if unsuccessful, then redirect back to the login with the form data
-        return redirect()->back()->withInput($request->only('username'));
     }
 
     public function logout()

@@ -66,7 +66,6 @@ class BarangDataTable extends DataTable
                     ->buttons([
                         Button::make('excel'),
                         Button::make('csv'),
-                        Button::make('pdf'),
                         Button::make('print'),
                     ])
                     // button, length, filtering, processing, table, info, pagination

@@ -1,11 +1,5 @@
 @extends('petugas_peralatan.index')
 
-@section('title', 'List barang')
-
-@section('content_header')
-    <h1 class="m-0 text-dark">List barang</h1>
-@stop
-
 @section('content-petugas')
     <div class="container table-container">
         <div class="card bg-light border-3 border-primary table-card">

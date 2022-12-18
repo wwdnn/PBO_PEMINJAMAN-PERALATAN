@@ -2,7 +2,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Petugas Peralatan</title>
 </head>
 <body>
     <form id="Login" action="{{ route('petugas_peralatan.login.submit') }}" method="POST">
@@ -30,6 +30,9 @@
                     </span>
                 @ENDIF
             </div>
+            <div class="invalid" role="alert">
+                {{session('error_message')}}
+            </div>
             <input type="submit" value="Login">
         </div>
     </div>
@@ -51,6 +54,12 @@
         align-items: center;
         min-height: 100vh;
         background: #23242a;
+    }
+
+    .invalid{
+        color: red;
+        padding-top: 15px;
+        font-size: 12px;
     }
 
     .box{
